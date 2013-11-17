@@ -1,0 +1,9 @@
+To be honest you really only need to install Vundle and the .vimrc file to get everything set up for you... But anyways it's easier for me to commit this way in case any of the plugins I use explodes or something.
+
+The command to install Vundle is:
+
+git clone git@github.com:gmarik/vundle.git
+
+I always forget
+
+Also checkout youcompleteme for complete install instructions
