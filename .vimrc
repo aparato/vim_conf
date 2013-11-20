@@ -32,6 +32,7 @@ Bundle 'tpope/vim-fugitive.git'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'SirVer/ultisnips'
 Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/vimproc.vim'
 
 syntax on
 filetype on
@@ -164,3 +165,10 @@ nmap <leader>vr :tabedit $MYVIMRC<CR>
 "--- Fuzzy Finder ---"
 map <leader>ff :FufFile **/<CR>
 map <leader>fb :FufBuffer<CR>
+
+" --- Unite and stuff ---"
+nnoremap <C-p> :Unite file_rec/async<cr>
+nnoremap <space>/ :Unite grep:.<cr>
+let g:unite_source_history_yank_enable=1
+nnoremap <space>y :Unite history/yank<cr>
+nnoremap <space> :Unite -quick-match buffer<cr>
