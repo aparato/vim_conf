@@ -2,44 +2,43 @@
 set nocompatible
 set mouse=a
 
+"--- Have jj escape insert mode ---"
+inoremap jj <Esc>
 
 "---- Color in terminal ----"
 set term=screen-256color
 
-"--- Have jj escape insert mode ---"
-inoremap jj <Esc>
+if has('vim_starting')
+    set nocompatible
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-"--- vundle settings making your life easier ---"
-filetype off
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call neobundle#rc(expand('~/.vim/bundle/'))
 
 "------- Packages to use ------"
-Bundle 'gmarik/vundle'
-Bundle 'vim-scripts/delimitMate.vim.git'
-Bundle 'vim-scripts/Gundo.git'
-Bundle 'vim-scripts/L9.git'
-Bundle 'scrooloose/nerdcommenter.git'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'tpope/vim-surround.git'
-Bundle 'vim-scripts/Tagbar.git'
-Bundle 'mattn/emmet-vim.git'
-Bundle 'Valloric/YouCompleteMe.git'
-Bundle 'vexxor/zenburn.vim.git'
-Bundle 'Lokaltog/vim-powerline.git'
-Bundle 'tpope/vim-fugitive.git'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'SirVer/ultisnips'
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/vimproc.vim'
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'vim-scripts/delimitMate.vim.git'
+NeoBundle 'vim-scripts/Gundo.git'
+NeoBundle 'vim-scripts/L9.git'
+NeoBundle 'scrooloose/nerdcommenter.git'
+NeoBundle 'scrooloose/nerdtree.git'
+NeoBundle 'tpope/vim-surround.git'
+NeoBundle 'vim-scripts/Tagbar.git'
+NeoBundle 'mattn/emmet-vim.git'
+NeoBundle 'Valloric/YouCompleteMe.git'
+NeoBundle 'vexxor/zenburn.vim.git'
+NeoBundle 'Lokaltog/vim-powerline.git'
+NeoBundle 'tpope/vim-fugitive.git'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimproc.vim'
 
 syntax on
 filetype on
 filetype plugin indent on
 
-" --- SuperTab --- "
-let g:SuperTabDefaultCompletionType = "context"
+NeoBundleCheck
 
 "--- easytags ---"
 " let g:easytags_cmd = "/usr/local/Cellar/ctags/5.8/bin/ctags"
@@ -167,8 +166,19 @@ map <leader>ff :FufFile **/<CR>
 map <leader>fb :FufBuffer<CR>
 
 " --- Unite and stuff ---"
-nnoremap <C-p> :Unite file_rec/async<cr>
-nnoremap <space>/ :Unite grep:.<cr>
-let g:unite_source_history_yank_enable=1
-nnoremap <space>y :Unite history/yank<cr>
-nnoremap <space> :Unite -quick-match buffer<cr>
+let g:unite_source_history_yank_enable = 1
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
+nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
+nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
+nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
+nnoremap <leader>e :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
+
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
