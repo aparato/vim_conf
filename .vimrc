@@ -2,18 +2,28 @@
 set nocompatible
 set mouse=a
 
+"---fucking line endings
+set ffs=unix
+
 "--- Have jj escape insert mode ---"
 inoremap jj <Esc>
 
 "---- Color in terminal ----"
-set term=screen-256color
+if has("unix") || has("mac")
+    set term=screen-256color
+    if has('vim_starting')
+        set runtimepath+=~/.vim/bundle/neobundle.vim/
+    endif
+    call neobundle#rc(expand('~/.vim/bundle/'))
+else
+    if has('vim_starting')
+        set runtimepath+=~/vimfiles/bundle/neobundle.vim/
+    endif
 
-if has('vim_starting')
-    set nocompatible
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    call neobundle#rc(expand('~/vimfiles/bundle/'))
 endif
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+
 
 "------- Packages to use ------"
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -25,8 +35,7 @@ NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle 'tpope/vim-surround.git'
 NeoBundle 'vim-scripts/Tagbar.git'
 NeoBundle 'mattn/emmet-vim.git'
-NeoBundle 'Valloric/YouCompleteMe.git'
-NeoBundle 'vexxor/zenburn.vim.git'
+NeoBundle 'croaker/mustang-vim'
 NeoBundle 'Lokaltog/vim-powerline.git'
 NeoBundle 'tpope/vim-fugitive.git'
 NeoBundle 'terryma/vim-multiple-cursors'
@@ -48,7 +57,16 @@ NeoBundleCheck
 "--- GUI window configurations ---"
 set winaltkeys=no
 set guioptions-=T
-set guifont=Ubuntu\ Mono\ 10
+set guioptions-=r
+set guioptions-=L
+
+if has("unix")
+    set guifont=Ubuntu\ Mono\ 10
+elseif has("mac")
+    set guifont=Ubuntu\ Mono\ 10
+else
+    set guifont=Inconsolata:h11
+endif
 
 
 "---Remap key---"
@@ -59,12 +77,11 @@ set foldmethod=indent
 set foldlevel=99
 
 "---compatibility and security---"
-set nocompatible
 set modelines=0
 set ttimeoutlen=100
 
 "---Set Color Scheme---"
-colors zenburn
+colors mustang
 
 "---Tabs configuration---"
 set tabstop=4
@@ -161,14 +178,14 @@ nnoremap <space> za
 "--- Create mappings to edit and source vimrc ---"
 nmap <leader>vr :tabedit $MYVIMRC<CR>
 
-"--- Fuzzy Finder ---"
-map <leader>ff :FufFile **/<CR>
-map <leader>fb :FufBuffer<CR>
-
 " --- Unite and stuff ---"
 let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
+if has("win32")
+    nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec<cr>
+else
+    nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async<cr>
+endif
 nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
 nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
 nnoremap <leader>o :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
