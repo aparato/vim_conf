@@ -11,6 +11,7 @@ inoremap jj <Esc>
 "---- Color in terminal ----"
 if has("unix") || has("mac")
     set term=screen-256color
+    set t_Co=256
     if has('vim_starting')
         set runtimepath+=~/.vim/bundle/neobundle.vim/
     endif
@@ -23,8 +24,6 @@ else
     call neobundle#rc(expand('~/vimfiles/bundle/'))
 endif
 
-
-
 "------- Packages to use ------"
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'vim-scripts/delimitMate.vim.git'
@@ -35,13 +34,17 @@ NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle 'tpope/vim-surround.git'
 NeoBundle 'vim-scripts/Tagbar.git'
 NeoBundle 'mattn/emmet-vim.git'
-NeoBundle 'croaker/mustang-vim'
+NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'Lokaltog/vim-powerline.git'
 NeoBundle 'tpope/vim-fugitive.git'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc.vim'
+
+if has("unix") || has("mac")
+    NeoBundle 'davidhalter/jedi-vim'
+endif
 
 syntax on
 filetype on
@@ -60,9 +63,9 @@ set guioptions-=T
 set guioptions-=r
 set guioptions-=L
 
-if has("unix")
-    set guifont=Ubuntu\ Mono\ 10
-elseif has("mac")
+if has("mac")
+    set guifont=Monaco\ Mono\ 10
+elseif has("unix")
     set guifont=Ubuntu\ Mono\ 10
 else
     set guifont=Inconsolata:h11
@@ -81,7 +84,7 @@ set modelines=0
 set ttimeoutlen=100
 
 "---Set Color Scheme---"
-colors mustang
+colorscheme lucius
 
 "---Tabs configuration---"
 set tabstop=4
