@@ -34,11 +34,12 @@ NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle 'tpope/vim-surround.git'
 NeoBundle 'vim-scripts/Tagbar.git'
 NeoBundle 'mattn/emmet-vim.git'
-NeoBundle 'jonathanfilip/vim-lucius'
+NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'Lokaltog/vim-powerline.git'
 NeoBundle 'tpope/vim-fugitive.git'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'SirVer/ultisnips'
+NeoBundle 'honza/vim-snippets'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc.vim'
 
@@ -84,7 +85,7 @@ set modelines=0
 set ttimeoutlen=100
 
 "---Set Color Scheme---"
-colorscheme lucius
+colorscheme jellybeans
 
 "---Tabs configuration---"
 set tabstop=4
@@ -166,9 +167,6 @@ map <leader>tb :TagbarToggle<CR>
 "--- Gundo mappings ---"
 map <leader>g :GundoToggle<CR>
 
-"--- ack ---"
-nmap <leader>a <Esc>:Ack!
-
 "---Store Backup files in a central place---"
 set backup
 set backupdir=~/tmp
@@ -188,6 +186,7 @@ if has("win32")
     nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec<cr>
 else
     nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async<cr>
+    nnoremap <leader>a :Unite grep:.<cr>
 endif
 nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
 nnoremap <leader>r :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
@@ -202,3 +201,7 @@ function! s:unite_settings()
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
+
+
+" Ultisnips conf
+let g:UltiSnipsExpandTrigger="<tab>"
