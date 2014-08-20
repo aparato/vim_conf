@@ -42,6 +42,7 @@ NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'groenewege/vim-less'
 
 if has("unix") || has("mac")
     NeoBundle 'davidhalter/jedi-vim'
