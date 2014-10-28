@@ -34,8 +34,6 @@ NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle 'tpope/vim-surround.git'
 NeoBundle 'vim-scripts/Tagbar.git'
 NeoBundle 'mattn/emmet-vim.git'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'Lokaltog/vim-powerline.git'
 NeoBundle 'tpope/vim-fugitive.git'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'SirVer/ultisnips'
@@ -43,6 +41,9 @@ NeoBundle 'honza/vim-snippets'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimproc.vim'
 NeoBundle 'groenewege/vim-less'
+NeoBundle 'whatyouhide/vim-gotham'
+NeoBundle 'bling/vim-airline'
+
 
 if has("unix") || has("mac")
     NeoBundle 'davidhalter/jedi-vim'
@@ -85,8 +86,11 @@ set foldlevel=99
 set modelines=0
 set ttimeoutlen=100
 
+"--- Airport conf ----"
+let g:airline#extensions#tabline#enabled = 1
+
 "---Set Color Scheme---"
-colorscheme jellybeans
+colorscheme gotham256
 
 "---Tabs configuration---"
 set tabstop=4
@@ -186,7 +190,7 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 if has("win32")
     nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec<cr>
 else
-    nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async<cr>
+    nnoremap <leader>tt :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async<cr>
     nnoremap <leader>a :Unite grep:.<cr>
 endif
 nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
