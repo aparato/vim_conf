@@ -15,13 +15,14 @@ if has("unix") || has("mac")
     if has('vim_starting')
         set runtimepath+=~/.vim/bundle/neobundle.vim/
     endif
-    call neobundle#rc(expand('~/.vim/bundle/'))
+
+    call neobundle#begin(expand('~/.vim/bundle/'))
 else
     if has('vim_starting')
         set runtimepath+=~/vimfiles/bundle/neobundle.vim/
     endif
 
-    call neobundle#rc(expand('~/vimfiles/bundle/'))
+    call neobundle#begin(expand('~/vimfiles/bundle/'))
 endif
 
 "------- Packages to use ------"
@@ -44,6 +45,8 @@ NeoBundle 'groenewege/vim-less'
 NeoBundle 'whatyouhide/vim-gotham'
 NeoBundle 'bling/vim-airline'
 
+call neobundle#end()
+
 
 if has("unix") || has("mac")
     NeoBundle 'davidhalter/jedi-vim'
@@ -53,7 +56,6 @@ syntax on
 filetype on
 filetype plugin indent on
 
-NeoBundleCheck
 
 "--- easytags ---"
 " let g:easytags_cmd = "/usr/local/Cellar/ctags/5.8/bin/ctags"
@@ -210,3 +212,6 @@ endfunction
 
 " Ultisnips conf
 let g:UltiSnipsExpandTrigger="<tab>"
+
+" ---- Check for uninstalled bundles
+NeoBundleCheck
