@@ -9,8 +9,6 @@ inoremap jj <Esc>
 
 "---- Color in terminal ----"
 if has("unix") || has("mac")
-    set term=screen-256color
-    set t_Co=256
     if has('vim_starting')
         set runtimepath+=~/.vim/bundle/neobundle.vim/
     endif
@@ -207,6 +205,9 @@ function! s:unite_settings()
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
+
+"--- clipboard this shit
+set clipboard=unnamedplus
 
 
 " Ultisnips conf
