@@ -1,6 +1,5 @@
 "--- Turn off vi compatibility ---"
 set nocompatible
-set mouse=a
 
 "---fucking line endings
 set ffs=unix
