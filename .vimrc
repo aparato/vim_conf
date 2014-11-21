@@ -86,7 +86,7 @@ set modelines=0
 set ttimeoutlen=100
 
 "--- Airport conf ----"
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 
 "---Set Color Scheme---"
 colorscheme gotham256
